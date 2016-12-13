@@ -3,6 +3,9 @@
 $config = include("config.php");
 $url = $config->guild_members_url;
 $result = file_get_contents($url, true);
+
+$url2 = $config->guild_log_url;
+$log = file_get_contents($url2, true);
 ?>
 
 <html>
