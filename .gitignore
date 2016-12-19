@@ -2,4 +2,6 @@ config.php
 /config.php
 tablesorter/
 fonts/
-.lnk
+
+# Windows shortcuts
+*.lnk
