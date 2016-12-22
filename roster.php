@@ -27,14 +27,14 @@ foreach ($json as $values){
 	$icon = "";
 	if($date != "" || $date != null){
 		$date = substr($date, 0, -14);
-		$date = str_replace('-', '', $date);
+		//$date = str_replace('-', '', $date);
 	} else {
 		if($name == "Guardian of Angels.9867"){
-			$date = '20120825';
+			$date = '2012-08-25';
 		} elseif ($name == "The Dusk"){
-			$date = '20130214';
+			$date = '2013-02-14';
 		} else {
-			$date = '20130301';
+			$date = '2013-03-01';
 		};
 	};
 	
@@ -110,8 +110,32 @@ foreach ($json as $values){
 	array_push($members, $array);
 };
 
-foreach ($members as $item){
-	echo print_r($item);
+function get($members){
+	foreach($members as $item){
+		$name = $item["name"];
+		$rank = $item["rank"];
+		$date = $item["date"];
+		$promoted = $item["promoted"];
+		$color = $item["color"];
+		$icon = $item["icon"];
+		$number = $item["number"];
+		
+		if ($date != "" || $date != null){
+			$date = explode("-", $date);
+			$date = $date[2] . "/" . $date[1] . "/" . $date[0];
+		};
+		
+		if ($promoted != "" || $promoted != null){
+			$promoted = substr($promoted, 0, -14);
+			$promoted = explode("-", $promoted);
+			$promoted = $promoted[2] . "/" . $promoted[1] . "/" . $promoted[0];
+			$promoted = "Promoted: " . $promoted;
+		};
+		
+		if($rank != "invited"){
+			echo '<tr style="color:'.$color.'"><td height="32px" width="5%" align="center" rank-value="'.$number.'"><div><img id="icon" src="'.$icon.'" alt="icon" align="center" title="'.$rank.'"/></div></td><td width="30%" style="font-weight: 600;"><div>'.$name.'</div></td><td rank-value="'.$number.'" width="10%">'.$rank.'</td><td width="15%"><div align="center">'.$date.'</div></td><td width="40%"><div align="center">'.$promoted.'</div></td></tr>';
+		};
+	};
 };
 
 ?>
@@ -127,8 +151,10 @@ foreach ($members as $item){
 <div id="main">
 	<table id="maintable" class="tablesorter" width="100%">
 		<thead id='tableHead'>
+			<tr id="tablehead" align="left"><th width="5%" align="center"><div id="icon">Icon</div></th><th width="30%"><div id="acc">Account Name</div></th><th width="15%"><div id="rank">Rank</div></th><th width="10%"><div id="date" align="center">Date Joined</div></th><th width="40%"><div id="promoted" align="center">Notes</div></th></tr>
 		</thead>
 		<tbody id='tableBody'>
+			<?php get($members); ?>
 		</tbody>
 	</table>
 </div>
@@ -155,7 +181,7 @@ foreach ($members as $item){
 			$("#maintable").tablesorter({
 				cancelSelection: true,
 				dateFormat: "uk",
-				sortList: [[0, 0]], 
+				sortList: [[2,0],[3,0]],
 				headers: { 2: { sorter: 'rangesort' }} 
 			});
 		} 
