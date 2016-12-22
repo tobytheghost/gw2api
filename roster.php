@@ -133,7 +133,7 @@ function get($members){
 		};
 		
 		if($rank != "invited"){
-			echo '<tr style="color:'.$color.'"><td height="32px" width="5%" align="center" rank-value="'.$number.'"><div><img id="icon" src="'.$icon.'" alt="icon" align="center" title="'.$rank.'"/></div></td><td width="30%" style="font-weight: 600;"><div>'.$name.'</div></td><td rank-value="'.$number.'" width="10%">'.$rank.'</td><td width="15%"><div align="center">'.$date.'</div></td><td width="40%"><div align="center">'.$promoted.'</div></td></tr>';
+			echo '<tr style="color:'.$color.'"><td style="background: linear-gradient(to right, '.rtrim($color, ";").', transparent);" height="32px" width="5%" align="center" rank-value="'.$number.'"><div><img style="height:90%;" id="icon" src="'.$icon.'" alt="icon" align="center" title="'.$rank.'"/></div></td><td width="30%" style="font-weight: 600;"><div>'.$name.'</div></td><td rank-value="'.$number.'" width="10%">'.$rank.'</td><td width="15%"><div align="center">'.$date.'</div></td><td width="40%"><div align="center">'.$promoted.'</div></td></tr>';
 		};
 	};
 };
