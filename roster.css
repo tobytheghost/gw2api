@@ -36,12 +36,12 @@ th {
 	
 }
 
+td {
+	font-size: 14px;
+}
+
 th div {
 	cursor: pointer;
-}
-td {
-	border-top: 1px solid #ddd;
-	font-size: 14px;
 }
 
 tr:nth-child(even) {

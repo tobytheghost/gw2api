@@ -95,6 +95,8 @@ foreach ($json as $values){
 	};
 	
 	$promoted = "";
+	$invited = "";
+	$invitedBy = "";
 	
 	foreach ($log as $item){
 		$type = $item["type"];
@@ -104,9 +106,15 @@ foreach ($json as $values){
 				$promoted = $item["time"];
 			};
 		};
+		if($type == 'invited'){
+			if($user == $name){
+				$invited = $item["time"];
+				$invitedBy = $item["invited_by"];
+			};
+		};
 	};
 	
-	$array = array("name" => $name, "rank" => $rank, "date" => $date, "promoted" => $promoted, "icon" => $icon, "number" => $number, "color" => $color);
+	$array = array("name" => $name, "rank" => $rank, "date" => $date, "promoted" => $promoted, "icon" => $icon, "number" => $number, "color" => $color, "invited" => $invited, "invited_by" => $invitedBy);
 	array_push($members, $array);
 };
 
@@ -119,6 +127,8 @@ function get($members){
 		$color = $item["color"];
 		$icon = $item["icon"];
 		$number = $item["number"];
+		$invited = $item["invited"];
+		$invitedBy = $item["invited_by"];
 		
 		if ($date != "" || $date != null){
 			$date = explode("-", $date);
@@ -129,11 +139,18 @@ function get($members){
 			$promoted = substr($promoted, 0, -14);
 			$promoted = explode("-", $promoted);
 			$promoted = $promoted[2] . "/" . $promoted[1] . "/" . $promoted[0];
-			$promoted = "Promoted: " . $promoted;
+			$promoted = "Promoted: " . $promoted . " ";
+		};
+		
+		if ($invited != "" || $invited != null){
+			$invited = substr($invited, 0, -14);
+			$invited = explode("-", $invited);
+			$invited = $invited[2] . "/" . $invited[1] . "/" . $invited[0];
+			$invitedBy = "Invited by: " . $invitedBy . " ";
 		};
 		
 		if($rank != "invited"){
-			echo '<tr style="color:'.$color.'"><td style="background: linear-gradient(to right, '.rtrim($color, ";").', transparent);" height="32px" width="5%" align="center" rank-value="'.$number.'"><div><img style="height:90%;" id="icon" src="'.$icon.'" alt="icon" align="center" title="'.$rank.'"/></div></td><td width="30%" style="font-weight: 600;"><div>'.$name.'</div></td><td rank-value="'.$number.'" width="10%">'.$rank.'</td><td width="15%"><div align="center">'.$date.'</div></td><td width="40%"><div align="center">'.$promoted.'</div></td></tr>';
+			echo '<tr style="color:'.$color.'"><td style="background: linear-gradient(to right, '.rtrim($color, ";").', transparent); border: none;" height="32px" width="5%" align="center" rank-value="'.$number.'"><div><img style="height:90%;" id="icon" src="'.$icon.'" alt="icon" align="center" title="'.$rank.'"/></div></td><td width="30%" style="font-weight: 600;"><div>'.$name.'</div></td><td rank-value="'.$number.'" width="10%">'.$rank.'</td><td width="15%"><div align="center">'.$date.'</div></td><td width="40%"><div align="center">'.$invitedBy.$promoted.'</div></td></tr>';
 		};
 	};
 };
