@@ -1,0 +1,9 @@
+<?php
+	return (object) array(    
+		'api_key' => '4FF680A3-CF52-F743-9F7E-861A306AF32A1CD92851-28E5-4161-B7FE-0C35177AF62E',
+		'guild_members_url' => 'https://api.guildwars2.com/v2/guild/2CDC20A5-616A-4F7A-A472-B2DE3073669B/members?access_token=AAF8E6DE-2CA5-784C-B346-4445BAB2C547BEEE406E-631A-4759-AB24-2925F613AD09',
+		'guild_log_url' => 'https://api.guildwars2.com/v2/guild/2CDC20A5-616A-4F7A-A472-B2DE3073669B/log?access_token=AAF8E6DE-2CA5-784C-B346-4445BAB2C547BEEE406E-631A-4759-AB24-2925F613AD09'
+	);
+?>
+
+
